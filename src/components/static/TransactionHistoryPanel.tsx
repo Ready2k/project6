@@ -14,14 +14,14 @@ export default function TransactionHistoryPanel({ transactions }: TransactionHis
 
   return (
     <section 
-      className="bg-white rounded-lg shadow-md p-4 border-2 border-gray-200 hover:shadow-lg transition-shadow duration-200"
+      className="bg-white rounded-lg shadow-sm p-4 border border-gray-200"
       aria-labelledby="transaction-history-heading"
     >
-      <h2 id="transaction-history-heading" className="text-lg font-semibold mb-4 text-gray-800 border-b-2 border-purple-100 pb-2 flex items-center gap-2">
-        <span className="text-xl" aria-hidden="true">📊</span>
+      <h2 id="transaction-history-heading" className="text-base font-semibold mb-3 text-gray-900 flex items-center gap-2">
+        <span className="text-lg" aria-hidden="true">📊</span>
         Transaction History
       </h2>
-      <div className="space-y-2 max-h-96 overflow-y-auto">
+      <div className="space-y-2 max-h-80 overflow-y-auto">
         {transactions.map((transaction) => (
           <div key={transaction.id} className="border-b border-gray-100 pb-2 last:border-b-0">
             <div className="flex justify-between items-start">

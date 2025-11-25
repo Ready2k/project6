@@ -7,37 +7,34 @@ interface CustomerProfilePanelProps {
 export default function CustomerProfilePanel({ customer }: CustomerProfilePanelProps) {
   return (
     <section 
-      className="bg-white rounded-lg shadow-md p-4 border-2 border-gray-200 hover:shadow-lg transition-shadow duration-200"
+      className="p-4 border-b border-gray-200"
       aria-labelledby="customer-profile-heading"
     >
-      <h2 id="customer-profile-heading" className="text-lg font-semibold mb-4 text-gray-800 border-b-2 border-blue-100 pb-2 flex items-center gap-2">
-        <span className="text-xl" aria-hidden="true">👤</span>
-        Customer Profile
-      </h2>
-      <div className="space-y-3">
+      <h3 id="customer-profile-heading" className="text-sm font-semibold text-gray-700 mb-3">Customer Details</h3>
+      <div className="space-y-3 text-xs">
         <div>
-          <label className="text-xs font-medium text-gray-500 uppercase">Customer ID</label>
-          <p className="text-sm text-gray-900">{customer.id}</p>
+          <div className="text-gray-500">Customer ID</div>
+          <div className="font-medium text-gray-900">{customer.id}</div>
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 uppercase">Name</label>
-          <p className="text-sm text-gray-900">{customer.name}</p>
+          <div className="text-gray-500">Name</div>
+          <div className="font-medium text-gray-900">{customer.name}</div>
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 uppercase">Account Number</label>
-          <p className="text-sm text-gray-900">{customer.accountNumber}</p>
+          <div className="text-gray-500">Account Number</div>
+          <div className="font-medium text-gray-900">{customer.accountNumber}</div>
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 uppercase">Phone</label>
-          <p className="text-sm text-gray-900">{customer.phone}</p>
+          <div className="text-gray-500">Phone</div>
+          <div className="font-medium text-gray-900">{customer.phone}</div>
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 uppercase">Email</label>
-          <p className="text-sm text-gray-900">{customer.email}</p>
+          <div className="text-gray-500">Email</div>
+          <div className="font-medium text-gray-900">{customer.email}</div>
         </div>
         <div>
-          <label className="text-xs font-medium text-gray-500 uppercase">Address</label>
-          <p className="text-sm text-gray-900">{customer.address}</p>
+          <div className="text-gray-500">Address</div>
+          <div className="font-medium text-gray-900">{customer.address}</div>
         </div>
       </div>
     </section>

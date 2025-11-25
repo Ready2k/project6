@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useTimeline } from '../../hooks/useTimeline';
 import type { TimelineEvent } from '../../types/timeline';
-import Header from './Header';
 import ConversationArea from './ConversationArea';
 import AiActivityFeed from './AiActivityFeed';
 import DynamicTileContainer from './DynamicTileContainer';
@@ -31,13 +30,124 @@ function DynamicView({ timelineData }: DynamicViewProps) {
   }, [timelineState]);
 
   return (
-    <div className="h-screen bg-gradient-to-br from-gray-50 to-white flex flex-col" role="main">
-      <Header />
+    <div className="h-screen bg-gray-100 flex flex-col" role="main">
+      {/* Top Navigation Bar - MS Dynamics style */}
+      <div className="bg-[#002050] text-white px-4 py-2 flex items-center justify-between shadow-lg">
+        <div className="flex items-center gap-4">
+          <span className="text-xl font-semibold">Agent Desktop</span>
+          <span className="text-xs bg-purple-600 px-2 py-1 rounded">DYNAMIC MODE</span>
+        </div>
+        
+        {/* Call Controls - Center */}
+        <div className="flex items-center gap-2">
+          <button 
+            className="text-white hover:bg-blue-900 px-3 py-2 rounded text-lg transition-colors"
+            title="Mute Call"
+            aria-label="Mute call"
+          >
+            🔇
+          </button>
+          <button 
+            className="text-white hover:bg-blue-900 px-3 py-2 rounded text-lg transition-colors"
+            title="Hold Call"
+            aria-label="Hold call"
+          >
+            ⏸️
+          </button>
+          <button 
+            className="text-white hover:bg-red-700 bg-red-600 px-3 py-2 rounded text-lg transition-colors"
+            title="End Call"
+            aria-label="End call"
+          >
+            📞
+          </button>
+          <button 
+            className="text-white hover:bg-blue-900 px-3 py-2 rounded text-lg transition-colors"
+            title="Transfer Call"
+            aria-label="Transfer call"
+          >
+            ↔️
+          </button>
+          <div className="ml-2 text-xs">
+            <div className="text-gray-300">Duration: <span className="font-mono text-white">05:32</span></div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button className="text-white hover:bg-blue-900 px-3 py-1 rounded text-sm" title="Notifications">🔔</button>
+          <button className="text-white hover:bg-blue-900 px-3 py-1 rounded text-sm" title="Settings">⚙️</button>
+        </div>
+      </div>
+
+      {/* Customer Header Bar */}
+      <div className="bg-white border-b border-gray-300 px-6 py-3 flex items-center justify-between shadow-sm">
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
+            SM
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">Sarah Mitchell</h2>
+            <p className="text-xs text-gray-600">Customer ID: CUST-78392 • Premium Checking</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-6">
+          <div className="text-center">
+            <div className="text-xs text-gray-500">Sentiment</div>
+            <div className="flex items-center gap-1 mt-1">
+              <div className="w-16 bg-gray-200 rounded-full h-1.5">
+                <div className="bg-green-500 h-1.5 rounded-full" style={{ width: '75%' }}></div>
+              </div>
+              <span className="text-xs font-medium text-green-600">Positive</span>
+            </div>
+          </div>
+        </div>
+      </div>
       
       <div className="flex-1 flex overflow-hidden min-h-0">
-        {/* Left side: Conversation and AI Activity - Clean and spacious */}
+        {/* Left Sidebar - Customer Details */}
+        <aside className="w-72 bg-white border-r border-gray-300 overflow-y-auto shadow-sm">
+          <div className="p-4 border-b border-gray-200">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3">Customer Details</h3>
+            <div className="space-y-3 text-xs">
+              <div>
+                <div className="text-gray-500">Account Number</div>
+                <div className="font-medium text-gray-900">4892-3847-2910</div>
+              </div>
+              <div>
+                <div className="text-gray-500">Phone</div>
+                <div className="font-medium text-gray-900">+1 (555) 234-5678</div>
+              </div>
+              <div>
+                <div className="text-gray-500">Email</div>
+                <div className="font-medium text-gray-900">sarah.mitchell@email.com</div>
+              </div>
+              <div>
+                <div className="text-gray-500">Balance</div>
+                <div className="font-medium text-green-600">$12,847.53</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="p-4">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3">Quick Actions</h3>
+            <div className="space-y-2">
+              <button className="w-full text-left px-3 py-2 bg-blue-50 text-blue-700 rounded text-xs hover:bg-blue-100">
+                📋 View Full Profile
+              </button>
+              <button className="w-full text-left px-3 py-2 bg-blue-50 text-blue-700 rounded text-xs hover:bg-blue-100">
+                📊 Transaction History
+              </button>
+              <button className="w-full text-left px-3 py-2 bg-blue-50 text-blue-700 rounded text-xs hover:bg-blue-100">
+                🔒 Security Settings
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        {/* Center: Conversation and AI Activity */}
         <div 
-          className="flex-1 flex flex-col p-6 gap-6 overflow-hidden"
+          className="flex-1 flex flex-col p-4 gap-4 overflow-hidden bg-gray-50"
           role="region"
           aria-label="Conversation and AI activity area"
         >
@@ -49,27 +159,29 @@ function DynamicView({ timelineData }: DynamicViewProps) {
           </div>
         </div>
 
-        {/* Right side: Dynamic Tiles - Minimal and context-aware */}
+        {/* Right Sidebar: Dynamic Tiles */}
         <aside 
-          className="w-96 bg-white border-l border-gray-200 shadow-lg p-6 overflow-y-auto"
+          className="w-96 bg-white border-l border-gray-300 shadow-sm overflow-y-auto"
           role="complementary"
           aria-label="Dynamic task tiles"
         >
-          <div className="mb-4">
-            <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-              <span className="text-xl">💼</span>
-              Active Tasks
+          <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-white">
+            <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+              <span className="text-lg">🤖</span>
+              AI Copilot
             </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              AI-suggested actions appear here
+            <p className="text-xs text-gray-600 mt-1">
+              Get AI-powered help with customer tasks
             </p>
           </div>
-          <DynamicTileContainer
-            visiblePanels={visiblePanels}
-            tileData={tileData}
-            tileStatuses={tileStatuses}
-            onTileSubmit={handleTileSubmit}
-          />
+          <div className="p-4">
+            <DynamicTileContainer
+              visiblePanels={visiblePanels}
+              tileData={tileData}
+              tileStatuses={tileStatuses}
+              onTileSubmit={handleTileSubmit}
+            />
+          </div>
         </aside>
       </div>
 
