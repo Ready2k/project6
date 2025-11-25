@@ -5,6 +5,7 @@ import ConversationArea from './ConversationArea';
 import AiActivityFeed from './AiActivityFeed';
 import DynamicTileContainer from './DynamicTileContainer';
 import MouseCursor from './MouseCursor';
+import Narration from '../shared/Narration';
 
 interface DynamicViewProps {
   timelineData: TimelineEvent[];
@@ -221,6 +222,9 @@ function DynamicView({ timelineData }: DynamicViewProps) {
         action={timelineState.mouseAction || undefined}
         visible={timelineState.mouseVisible}
       />
+
+      {/* Narration Overlay */}
+      <Narration text={timelineState.narration} />
     </div>
   );
 }

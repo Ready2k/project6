@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import type { TranscriptLine } from '../../types/timeline';
 
 interface AiAssistSidebarProps {
@@ -5,6 +6,13 @@ interface AiAssistSidebarProps {
 }
 
 export default function AiAssistSidebar({ transcripts }: AiAssistSidebarProps) {
+  const transcriptEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when new transcripts arrive
+  useEffect(() => {
+    transcriptEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [transcripts]);
+
   return (
     <aside 
       className="bg-white rounded-lg shadow-md p-4 border-2 border-gray-200 h-full flex flex-col hover:shadow-lg transition-shadow duration-200"
@@ -27,6 +35,7 @@ export default function AiAssistSidebar({ transcripts }: AiAssistSidebarProps) {
               <span className="text-gray-700 ml-1">{line.text}</span>
             </div>
           ))}
+          <div ref={transcriptEndRef} />
         </div>
       </div>
 

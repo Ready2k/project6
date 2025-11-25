@@ -20,6 +20,8 @@ import type {
   TabSwitchEvent,
   TabLoadingEvent,
   TabLoadedEvent,
+  FormTypingEvent,
+  NarrationEvent,
 } from '../types/timeline';
 
 interface UseTimelineReturn extends TimelineState {
@@ -33,6 +35,8 @@ interface UseTimelineReturn extends TimelineState {
   mouseVisible: boolean;
   activeTab: string | null;
   tabLoading: boolean;
+  formValues: Record<string, string>;
+  narration: string | null;
 }
 
 export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
@@ -81,10 +85,12 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [mouseTarget, setMouseTarget] = useState<string | null>(null);
+  const [formValues, setFormValues] = useState<Record<string, string>>({});
   const [mouseAction, setMouseAction] = useState<'move' | 'click' | null>(null);
   const [mouseVisible, setMouseVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<string | null>(null);
   const [tabLoading, setTabLoading] = useState(false);
+  const [narration, setNarration] = useState<string | null>(null);
 
   // Refs for managing timeline playback
   const currentEventIndex = useRef(0);
@@ -282,6 +288,35 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
           break;
         }
 
+        case 'form_typing': {
+          const typingEvent = event as FormTypingEvent;
+          if (typeof typingEvent.field !== 'string') {
+            console.warn('Invalid form_typing event: missing or invalid field property', event);
+            break;
+          }
+          if (typeof typingEvent.value !== 'string') {
+            console.warn('Invalid form_typing event: missing or invalid value property', event);
+            break;
+          }
+          setFormValues(prev => ({
+            ...prev,
+            [typingEvent.field]: typingEvent.value,
+          }));
+          break;
+        }
+
+        case 'narration': {
+          const narrationEvent = event as NarrationEvent;
+          if (typeof narrationEvent.text !== 'string') {
+            console.warn('Invalid narration event: missing or invalid text property', event);
+            break;
+          }
+          setNarration(narrationEvent.text);
+          // Auto-clear narration after 5 seconds
+          setTimeout(() => setNarration(null), 5000);
+          break;
+        }
+
         default:
           console.warn('Unrecognized event type:', (event as any).event);
       }
@@ -357,6 +392,8 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
     setMouseVisible(false);
     setActiveTab(null);
     setTabLoading(false);
+    setFormValues({});
+    setNarration(null);
     currentEventIndex.current = 0;
     pausedAt.current = 0;
     
@@ -425,5 +462,7 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
     mouseVisible,
     activeTab,
     tabLoading,
+    formValues,
+    narration,
   };
 }

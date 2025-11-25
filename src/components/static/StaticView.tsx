@@ -10,6 +10,7 @@ import ChangeAddressTile from '../tiles/ChangeAddressTile';
 import DisputeTransactionTile from '../tiles/DisputeTransactionTile';
 import UpdateContactDetailsTile from '../tiles/UpdateContactDetailsTile';
 import MouseCursor from '../dynamic/MouseCursor';
+import Narration from '../shared/Narration';
 import {
   mockCustomer,
   mockAccount,
@@ -163,6 +164,7 @@ export default function StaticView({ timelineData }: StaticViewProps) {
           <div className="bg-white border-b border-gray-300 px-4 flex gap-1 shadow-sm">
             <button
               onClick={() => setActiveTab('overview')}
+              data-tab="overview"
               className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === 'overview'
                   ? 'border-blue-600 text-blue-600'
@@ -173,6 +175,7 @@ export default function StaticView({ timelineData }: StaticViewProps) {
             </button>
             <button
               onClick={() => setActiveTab('changeAddress')}
+              data-tab="changeAddress"
               className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === 'changeAddress'
                   ? 'border-blue-600 text-blue-600'
@@ -183,6 +186,7 @@ export default function StaticView({ timelineData }: StaticViewProps) {
             </button>
             <button
               onClick={() => setActiveTab('disputeTransaction')}
+              data-tab="disputeTransaction"
               className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === 'disputeTransaction'
                   ? 'border-blue-600 text-blue-600'
@@ -193,6 +197,7 @@ export default function StaticView({ timelineData }: StaticViewProps) {
             </button>
             <button
               onClick={() => setActiveTab('updateContactDetails')}
+              data-tab="updateContactDetails"
               className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === 'updateContactDetails'
                   ? 'border-blue-600 text-blue-600'
@@ -225,7 +230,7 @@ export default function StaticView({ timelineData }: StaticViewProps) {
                 {activeTab === 'changeAddress' && (
                   <div className="max-w-2xl">
                     <ChangeAddressTile
-                      data={undefined}
+                      data={timelineState.formValues}
                       onSubmit={(data) => timelineState.handleTileSubmit('changeAddress', data)}
                       status={timelineState.tileStatuses['changeAddress'] || 'idle'}
                     />
@@ -235,7 +240,7 @@ export default function StaticView({ timelineData }: StaticViewProps) {
                 {activeTab === 'disputeTransaction' && (
                   <div className="max-w-2xl">
                     <DisputeTransactionTile
-                      data={undefined}
+                      data={timelineState.formValues}
                       onSubmit={(data) => timelineState.handleTileSubmit('disputeTransaction', data)}
                       status={timelineState.tileStatuses['disputeTransaction'] || 'idle'}
                     />
@@ -245,7 +250,7 @@ export default function StaticView({ timelineData }: StaticViewProps) {
                 {activeTab === 'updateContactDetails' && (
                   <div className="max-w-2xl">
                     <UpdateContactDetailsTile
-                      data={undefined}
+                      data={timelineState.formValues}
                       onSubmit={(data) => timelineState.handleTileSubmit('updateContactDetails', data)}
                       status={timelineState.tileStatuses['updateContactDetails'] || 'idle'}
                     />
@@ -298,6 +303,9 @@ export default function StaticView({ timelineData }: StaticViewProps) {
         action={timelineState.mouseAction || undefined}
         visible={timelineState.mouseVisible}
       />
+
+      {/* Narration Overlay */}
+      <Narration text={timelineState.narration} />
     </div>
   );
 }

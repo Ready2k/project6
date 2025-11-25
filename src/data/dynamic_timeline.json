@@ -6,6 +6,11 @@
     "text": "Hi, I need to update my address. I've recently moved."
   },
   {
+    "t": 500,
+    "event": "narration",
+    "text": "In the dynamic view, AI listens to the conversation and automatically surfaces relevant forms."
+  },
+  {
     "t": 1500,
     "event": "ai_reasoning",
     "text": "Customer is requesting an address change. This is a common request that requires identity verification and address update form."
@@ -30,6 +35,11 @@
     "t": 4500,
     "event": "panel_show",
     "panel": "verifyIdentity"
+  },
+  {
+    "t": 4800,
+    "event": "narration",
+    "text": "AI automatically displays the identity verification form - no tab switching needed."
   },
   {
     "t": 5000,
@@ -57,6 +67,11 @@
     "text": "Sure, I can verify my identity. My new address is 128 Oak Avenue, Springfield, IL 62704."
   },
   {
+    "t": 7500,
+    "event": "narration",
+    "text": "AI heard the address in the conversation and extracts the details automatically..."
+  },
+  {
     "t": 8000,
     "event": "ai_reasoning",
     "text": "Identity verification in progress. Customer has provided new address details. Preparing address change form."
@@ -70,6 +85,11 @@
     "t": 9500,
     "event": "panel_show",
     "panel": "changeAddress"
+  },
+  {
+    "t": 9800,
+    "event": "narration",
+    "text": "...and pre-fills the form! The agent just needs to review and confirm."
   },
   {
     "t": 10000,
@@ -121,6 +141,11 @@
     "panel": "changeAddress"
   },
   {
+    "t": 17500,
+    "event": "narration",
+    "text": "One task done! Now the customer has another request - watch how AI adapts..."
+  },
+  {
     "t": 18000,
     "event": "transcript",
     "speaker": "customer",
@@ -147,6 +172,11 @@
     "t": 23000,
     "event": "ai_reasoning",
     "text": "Customer does not recognize a transaction. This is a potential fraud case. Displaying dispute transaction tile."
+  },
+  {
+    "t": 23500,
+    "event": "narration",
+    "text": "AI detects a dispute scenario and instantly surfaces the right form with pre-filled data."
   },
   {
     "t": 24000,
@@ -198,6 +228,11 @@
     "text": "Perfect! One more thing - I'd like to update my phone number too."
   },
   {
+    "t": 33500,
+    "event": "narration",
+    "text": "Third request, third form - AI seamlessly adapts to each task without manual navigation."
+  },
+  {
     "t": 34000,
     "event": "ai_reasoning",
     "text": "Customer wants to update contact details. Displaying contact details update tile."
@@ -239,6 +274,11 @@
     "event": "transcript",
     "speaker": "agent",
     "text": "Done! Your phone number has been updated."
+  },
+  {
+    "t": 41500,
+    "event": "narration",
+    "text": "Three tasks completed efficiently - AI handled the complexity, the agent focused on the customer."
   },
   {
     "t": 42000,

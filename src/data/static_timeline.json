@@ -6,6 +6,11 @@
     "text": "Hi, I need to update my address. I've recently moved."
   },
   {
+    "t": 500,
+    "event": "narration",
+    "text": "In the static view, the agent must manually navigate through multiple tabs to complete tasks."
+  },
+  {
     "t": 2000,
     "event": "transcript",
     "speaker": "agent",
@@ -13,13 +18,18 @@
   },
   {
     "t": 2500,
+    "event": "narration",
+    "text": "The agent clicks on the 'Change Address' tab..."
+  },
+  {
+    "t": 2500,
     "event": "mouse_move",
-    "target": "button:contains('Change Address')"
+    "target": "button[data-tab='changeAddress']"
   },
   {
     "t": 3000,
     "event": "mouse_click",
-    "target": "button:contains('Change Address')"
+    "target": "button[data-tab='changeAddress']"
   },
   {
     "t": 3100,
@@ -30,6 +40,11 @@
     "t": 3200,
     "event": "tab_loading",
     "tab": "changeAddress"
+  },
+  {
+    "t": 3500,
+    "event": "narration",
+    "text": "...and waits for the form to load."
   },
   {
     "t": 5000,
@@ -43,94 +58,184 @@
     "text": "Thank you. My new address is 128 Oak Avenue, Springfield, IL 62704."
   },
   {
-    "t": 7000,
+    "t": 5500,
+    "event": "narration",
+    "text": "Now the agent manually types each field, one by one..."
+  },
+  {
+    "t": 6000,
     "event": "mouse_move",
-    "target": "input[name='street']"
+    "target": "input#street"
+  },
+  {
+    "t": 6200,
+    "event": "mouse_click",
+    "target": "input#street"
+  },
+  {
+    "t": 6500,
+    "event": "form_typing",
+    "field": "street",
+    "value": "128 Oak Avenue"
   },
   {
     "t": 7500,
+    "event": "mouse_move",
+    "target": "input#city"
+  },
+  {
+    "t": 7700,
     "event": "mouse_click",
-    "target": "input[name='street']"
+    "target": "input#city"
+  },
+  {
+    "t": 8000,
+    "event": "form_typing",
+    "field": "city",
+    "value": "Springfield"
+  },
+  {
+    "t": 8800,
+    "event": "mouse_move",
+    "target": "input#state"
   },
   {
     "t": 9000,
+    "event": "mouse_click",
+    "target": "input#state"
+  },
+  {
+    "t": 9200,
+    "event": "form_typing",
+    "field": "state",
+    "value": "IL"
+  },
+  {
+    "t": 9800,
+    "event": "mouse_move",
+    "target": "input#zip"
+  },
+  {
+    "t": 10000,
+    "event": "mouse_click",
+    "target": "input#zip"
+  },
+  {
+    "t": 10200,
+    "event": "form_typing",
+    "field": "zip",
+    "value": "62704"
+  },
+  {
+    "t": 11000,
     "event": "transcript",
     "speaker": "agent",
     "text": "Perfect. I'm updating that now. Can you also verify your date of birth for security purposes?"
   },
   {
-    "t": 11000,
+    "t": 12000,
     "event": "transcript",
     "speaker": "customer",
     "text": "Sure, it's June 15th, 1985."
   },
   {
-    "t": 12000,
+    "t": 12500,
     "event": "mouse_move",
     "target": "button[type='submit']"
   },
   {
-    "t": 12500,
+    "t": 13000,
     "event": "mouse_click",
     "target": "button[type='submit']"
   },
   {
-    "t": 13000,
+    "t": 13500,
     "event": "transcript",
     "speaker": "agent",
     "text": "Thank you for confirming. I've updated your address in our system."
   },
   {
-    "t": 15000,
+    "t": 14000,
+    "event": "narration",
+    "text": "Task complete! But now the customer has another request..."
+  },
+  {
+    "t": 15500,
     "event": "transcript",
     "speaker": "customer",
     "text": "Great! While I have you, I also wanted to ask about a recent transaction."
   },
   {
-    "t": 17000,
+    "t": 17500,
     "event": "transcript",
     "speaker": "agent",
     "text": "Of course. Which transaction are you referring to?"
   },
   {
-    "t": 19000,
+    "t": 19500,
     "event": "transcript",
     "speaker": "customer",
     "text": "There's a charge from TechStore for $459.99. I don't recognize it."
   },
   {
-    "t": 19500,
-    "event": "mouse_move",
-    "target": "button:contains('Dispute Transaction')"
-  },
-  {
     "t": 20000,
-    "event": "mouse_click",
-    "target": "button:contains('Dispute Transaction')"
+    "event": "narration",
+    "text": "The agent must switch tabs again and wait for another form to load..."
   },
   {
-    "t": 20100,
+    "t": 20500,
+    "event": "mouse_move",
+    "target": "button[data-tab='disputeTransaction']"
+  },
+  {
+    "t": 21000,
+    "event": "mouse_click",
+    "target": "button[data-tab='disputeTransaction']"
+  },
+  {
+    "t": 21100,
     "event": "tab_switch",
     "tab": "disputeTransaction"
   },
   {
-    "t": 20200,
+    "t": 21200,
     "event": "tab_loading",
     "tab": "disputeTransaction"
   },
   {
-    "t": 22000,
+    "t": 23000,
     "event": "tab_loaded",
     "tab": "disputeTransaction"
   },
   {
-    "t": 23000,
+    "t": 23500,
     "event": "transcript",
     "speaker": "agent",
     "text": "Let me look into that for you. I see the transaction from November 24th. Would you like to dispute this charge?"
   },
   {
-    "t": 25000,
+    "t": 23800,
+    "event": "narration",
+    "text": "More manual data entry - typing transaction details from the conversation..."
+  },
+  {
+    "t": 24000,
+    "event": "mouse_move",
+    "target": "input#transactionId"
+  },
+  {
+    "t": 24200,
+    "event": "mouse_click",
+    "target": "input#transactionId"
+  },
+  {
+    "t": 24500,
+    "event": "form_typing",
+    "field": "transactionId",
+    "value": "TXN-001"
+  },
+  {
+    "t": 25500,
     "event": "transcript",
     "speaker": "customer",
     "text": "Yes, please. I definitely didn't make that purchase."
@@ -138,98 +243,156 @@
   {
     "t": 26000,
     "event": "mouse_move",
-    "target": "button[type='submit']"
+    "target": "input#amount"
+  },
+  {
+    "t": 26200,
+    "event": "mouse_click",
+    "target": "input#amount"
   },
   {
     "t": 26500,
+    "event": "form_typing",
+    "field": "amount",
+    "value": "459.99"
+  },
+  {
+    "t": 27500,
+    "event": "mouse_move",
+    "target": "textarea#reason"
+  },
+  {
+    "t": 27700,
+    "event": "mouse_click",
+    "target": "textarea#reason"
+  },
+  {
+    "t": 28000,
+    "event": "form_typing",
+    "field": "reason",
+    "value": "Unrecognized charge from TechStore"
+  },
+  {
+    "t": 29500,
+    "event": "mouse_move",
+    "target": "button[type='submit']"
+  },
+  {
+    "t": 30000,
     "event": "mouse_click",
     "target": "button[type='submit']"
   },
   {
-    "t": 27000,
+    "t": 30500,
     "event": "transcript",
     "speaker": "agent",
     "text": "I understand. I'm initiating a dispute for transaction TXN-001. You should see a provisional credit within 3-5 business days."
   },
   {
-    "t": 29000,
+    "t": 32500,
     "event": "transcript",
     "speaker": "customer",
     "text": "Actually, one more thing - I'd like to update my phone number too."
   },
   {
-    "t": 29500,
+    "t": 32800,
+    "event": "narration",
+    "text": "Yet another tab switch... this repetitive workflow slows down the agent."
+  },
+  {
+    "t": 33000,
     "event": "mouse_move",
-    "target": "button:contains('Update Contact')"
+    "target": "button[data-tab='updateContactDetails']"
   },
   {
-    "t": 30000,
+    "t": 33500,
     "event": "mouse_click",
-    "target": "button:contains('Update Contact')"
+    "target": "button[data-tab='updateContactDetails']"
   },
   {
-    "t": 30100,
+    "t": 33600,
     "event": "tab_switch",
     "tab": "updateContactDetails"
   },
   {
-    "t": 30200,
+    "t": 33700,
     "event": "tab_loading",
     "tab": "updateContactDetails"
   },
   {
-    "t": 32000,
+    "t": 35500,
     "event": "tab_loaded",
     "tab": "updateContactDetails"
   },
   {
-    "t": 33000,
+    "t": 36000,
     "event": "transcript",
     "speaker": "agent",
     "text": "Of course! What's your new phone number?"
   },
   {
-    "t": 35000,
+    "t": 38000,
     "event": "transcript",
     "speaker": "customer",
     "text": "It's (555) 987-6543."
   },
   {
-    "t": 36000,
+    "t": 38500,
+    "event": "mouse_move",
+    "target": "input#phone"
+  },
+  {
+    "t": 38700,
+    "event": "mouse_click",
+    "target": "input#phone"
+  },
+  {
+    "t": 39000,
+    "event": "form_typing",
+    "field": "phone",
+    "value": "(555) 987-6543"
+  },
+  {
+    "t": 40500,
     "event": "mouse_move",
     "target": "button[type='submit']"
   },
   {
-    "t": 36500,
+    "t": 41000,
     "event": "mouse_click",
     "target": "button[type='submit']"
   },
   {
-    "t": 37000,
+    "t": 41000,
+    "event": "narration",
+    "text": "Three separate forms, multiple tab switches, lots of manual typing. This is the current state."
+  },
+  {
+    "t": 41500,
     "event": "transcript",
     "speaker": "agent",
     "text": "Done! Your phone number has been updated."
   },
   {
-    "t": 39000,
+    "t": 43500,
     "event": "transcript",
     "speaker": "customer",
     "text": "Thank you so much for all your help!"
   },
   {
-    "t": 41000,
+    "t": 45500,
     "event": "transcript",
     "speaker": "agent",
     "text": "You're very welcome! Is there anything else I can assist you with today?"
   },
   {
-    "t": 43000,
+    "t": 47500,
     "event": "transcript",
     "speaker": "customer",
     "text": "No, that's everything. Have a great day!"
   },
   {
-    "t": 45000,
+    "t": 49500,
     "event": "transcript",
     "speaker": "agent",
     "text": "You too, Sarah. Take care!"

@@ -76,6 +76,19 @@ export type TabLoadedEvent = {
   tab: string;
 };
 
+export type FormTypingEvent = {
+  t: number;
+  event: 'form_typing';
+  field: string; // CSS selector or field name
+  value: string;
+};
+
+export type NarrationEvent = {
+  t: number;
+  event: 'narration';
+  text: string;
+};
+
 export type TimelineEvent =
   | TranscriptEvent
   | AiReasoningEvent
@@ -88,7 +101,9 @@ export type TimelineEvent =
   | MouseClickEvent
   | TabSwitchEvent
   | TabLoadingEvent
-  | TabLoadedEvent;
+  | TabLoadedEvent
+  | FormTypingEvent
+  | NarrationEvent;
 
 export interface TranscriptLine {
   speaker: 'customer' | 'agent';
