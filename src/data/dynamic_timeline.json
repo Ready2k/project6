@@ -1,0 +1,272 @@
+[
+  {
+    "t": 0,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Hi, I need to update my address. I've recently moved."
+  },
+  {
+    "t": 1500,
+    "event": "ai_reasoning",
+    "text": "Customer is requesting an address change. This is a common request that requires identity verification and address update form."
+  },
+  {
+    "t": 2000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "Hello Sarah! I'd be happy to help you update your address."
+  },
+  {
+    "t": 3000,
+    "event": "ai_action_attempt",
+    "action": "Retrieving customer profile and account information"
+  },
+  {
+    "t": 4000,
+    "event": "ai_reasoning",
+    "text": "Customer identity needs verification before proceeding with address change. Displaying identity verification tile."
+  },
+  {
+    "t": 4500,
+    "event": "panel_show",
+    "panel": "verifyIdentity"
+  },
+  {
+    "t": 5000,
+    "event": "auto_populate",
+    "panel": "verifyIdentity",
+    "data": {
+      "idType": "Driver's License",
+      "verificationMethod": "Document Upload"
+    }
+  },
+  {
+    "t": 6000,
+    "event": "mouse_move",
+    "target": "button[type='submit']"
+  },
+  {
+    "t": 6500,
+    "event": "mouse_click",
+    "target": "button[type='submit']"
+  },
+  {
+    "t": 7000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Sure, I can verify my identity. My new address is 128 Oak Avenue, Springfield, IL 62704."
+  },
+  {
+    "t": 8000,
+    "event": "ai_reasoning",
+    "text": "Identity verification in progress. Customer has provided new address details. Preparing address change form."
+  },
+  {
+    "t": 9000,
+    "event": "panel_hide",
+    "panel": "verifyIdentity"
+  },
+  {
+    "t": 9500,
+    "event": "panel_show",
+    "panel": "changeAddress"
+  },
+  {
+    "t": 10000,
+    "event": "auto_populate",
+    "panel": "changeAddress",
+    "data": {
+      "street": "128 Oak Avenue",
+      "city": "Springfield",
+      "state": "IL",
+      "zip": "62704"
+    }
+  },
+  {
+    "t": 11000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "I've pre-filled the address change form with the information you provided. Please review and confirm."
+  },
+  {
+    "t": 13000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "That looks correct. I'll submit it now."
+  },
+  {
+    "t": 13500,
+    "event": "mouse_move",
+    "target": "button[type='submit']"
+  },
+  {
+    "t": 14000,
+    "event": "mouse_click",
+    "target": "button[type='submit']"
+  },
+  {
+    "t": 15000,
+    "event": "ai_action_attempt",
+    "action": "Processing address change request"
+  },
+  {
+    "t": 16000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "Great! Your address has been updated successfully."
+  },
+  {
+    "t": 17000,
+    "event": "panel_hide",
+    "panel": "changeAddress"
+  },
+  {
+    "t": 18000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Thank you! While I have you, I also wanted to ask about a recent transaction."
+  },
+  {
+    "t": 19000,
+    "event": "ai_reasoning",
+    "text": "Customer is inquiring about a transaction. This may lead to a dispute. Preparing to show transaction dispute tile if needed."
+  },
+  {
+    "t": 20000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "Of course. Which transaction are you referring to?"
+  },
+  {
+    "t": 22000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "There's a charge from TechStore for $459.99. I don't recognize it."
+  },
+  {
+    "t": 23000,
+    "event": "ai_reasoning",
+    "text": "Customer does not recognize a transaction. This is a potential fraud case. Displaying dispute transaction tile."
+  },
+  {
+    "t": 24000,
+    "event": "panel_show",
+    "panel": "disputeTransaction"
+  },
+  {
+    "t": 25000,
+    "event": "auto_populate",
+    "panel": "disputeTransaction",
+    "data": {
+      "transactionId": "TXN-001",
+      "amount": "459.99",
+      "reason": "Unrecognized charge"
+    }
+  },
+  {
+    "t": 26000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "I see the transaction from November 24th. I've prepared a dispute form for you."
+  },
+  {
+    "t": 28000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Yes, I'd like to dispute it. I definitely didn't make that purchase."
+  },
+  {
+    "t": 30000,
+    "event": "ai_action_attempt",
+    "action": "Initiating transaction dispute for TXN-001"
+  },
+  {
+    "t": 31000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "I've initiated the dispute. You should see a provisional credit within 3-5 business days."
+  },
+  {
+    "t": 32000,
+    "event": "panel_hide",
+    "panel": "disputeTransaction"
+  },
+  {
+    "t": 33000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Perfect! One more thing - I'd like to update my phone number too."
+  },
+  {
+    "t": 34000,
+    "event": "ai_reasoning",
+    "text": "Customer wants to update contact details. Displaying contact details update tile."
+  },
+  {
+    "t": 35000,
+    "event": "panel_show",
+    "panel": "updateContactDetails"
+  },
+  {
+    "t": 36000,
+    "event": "auto_populate",
+    "panel": "updateContactDetails",
+    "data": {
+      "phone": "+1 (555) 234-5678",
+      "email": "sarah.mitchell@email.com",
+      "preferredContact": "Phone"
+    }
+  },
+  {
+    "t": 37000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "I've pulled up your current contact information. What would you like to change?"
+  },
+  {
+    "t": 39000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "My new phone number is (555) 987-6543."
+  },
+  {
+    "t": 40000,
+    "event": "ai_action_attempt",
+    "action": "Updating contact details"
+  },
+  {
+    "t": 41000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "Done! Your phone number has been updated."
+  },
+  {
+    "t": 42000,
+    "event": "panel_hide",
+    "panel": "updateContactDetails"
+  },
+  {
+    "t": 43000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Thank you so much for all your help!"
+  },
+  {
+    "t": 44000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "You're very welcome! Is there anything else I can assist you with today?"
+  },
+  {
+    "t": 46000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "No, that's everything. Have a great day!"
+  },
+  {
+    "t": 47000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "You too, Sarah. Take care!"
+  }
+]

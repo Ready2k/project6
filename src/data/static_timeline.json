@@ -1,0 +1,98 @@
+[
+  {
+    "t": 0,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Hi, I need to update my address. I've recently moved."
+  },
+  {
+    "t": 2000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "Hello Sarah! I'd be happy to help you update your address. Let me pull up your account."
+  },
+  {
+    "t": 5000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Thank you. My new address is 128 Oak Avenue, Springfield, IL 62704."
+  },
+  {
+    "t": 7000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "Perfect. I'm updating that now. Can you also verify your date of birth for security purposes?"
+  },
+  {
+    "t": 9000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Sure, it's June 15th, 1985."
+  },
+  {
+    "t": 11000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "Thank you for confirming. I've updated your address in our system."
+  },
+  {
+    "t": 13000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Great! While I have you, I also wanted to ask about a recent transaction."
+  },
+  {
+    "t": 15000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "Of course. Which transaction are you referring to?"
+  },
+  {
+    "t": 17000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "There's a charge from TechStore for $459.99. I don't recognize it."
+  },
+  {
+    "t": 19000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "Let me look into that for you. I see the transaction from November 24th. Would you like to dispute this charge?"
+  },
+  {
+    "t": 21000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Yes, please. I definitely didn't make that purchase."
+  },
+  {
+    "t": 23000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "I understand. I'm initiating a dispute for transaction TXN-001. You should see a provisional credit within 3-5 business days."
+  },
+  {
+    "t": 25000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "Thank you so much for your help!"
+  },
+  {
+    "t": 27000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "You're welcome! Is there anything else I can help you with today?"
+  },
+  {
+    "t": 29000,
+    "event": "transcript",
+    "speaker": "customer",
+    "text": "No, that's everything. Have a great day!"
+  },
+  {
+    "t": 31000,
+    "event": "transcript",
+    "speaker": "agent",
+    "text": "You too, Sarah. Take care!"
+  }
+]
