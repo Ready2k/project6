@@ -17,6 +17,9 @@ import type {
   AutoPopulateEvent,
   MouseMoveEvent,
   MouseClickEvent,
+  TabSwitchEvent,
+  TabLoadingEvent,
+  TabLoadedEvent,
 } from '../types/timeline';
 
 interface UseTimelineReturn extends TimelineState {
@@ -28,6 +31,8 @@ interface UseTimelineReturn extends TimelineState {
   mouseTarget: string | null;
   mouseAction: 'move' | 'click' | null;
   mouseVisible: boolean;
+  activeTab: string | null;
+  tabLoading: boolean;
 }
 
 export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
@@ -78,6 +83,8 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
   const [mouseTarget, setMouseTarget] = useState<string | null>(null);
   const [mouseAction, setMouseAction] = useState<'move' | 'click' | null>(null);
   const [mouseVisible, setMouseVisible] = useState(false);
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+  const [tabLoading, setTabLoading] = useState(false);
 
   // Refs for managing timeline playback
   const currentEventIndex = useRef(0);
@@ -244,6 +251,37 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
           break;
         }
 
+        case 'tab_switch': {
+          const tabEvent = event as TabSwitchEvent;
+          if (typeof tabEvent.tab !== 'string') {
+            console.warn('Invalid tab_switch event: missing or invalid tab property', event);
+            break;
+          }
+          setActiveTab(tabEvent.tab);
+          setTabLoading(false);
+          break;
+        }
+
+        case 'tab_loading': {
+          const loadingEvent = event as TabLoadingEvent;
+          if (typeof loadingEvent.tab !== 'string') {
+            console.warn('Invalid tab_loading event: missing or invalid tab property', event);
+            break;
+          }
+          setTabLoading(true);
+          break;
+        }
+
+        case 'tab_loaded': {
+          const loadedEvent = event as TabLoadedEvent;
+          if (typeof loadedEvent.tab !== 'string') {
+            console.warn('Invalid tab_loaded event: missing or invalid tab property', event);
+            break;
+          }
+          setTabLoading(false);
+          break;
+        }
+
         default:
           console.warn('Unrecognized event type:', (event as any).event);
       }
@@ -317,6 +355,8 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
     setMouseTarget(null);
     setMouseAction(null);
     setMouseVisible(false);
+    setActiveTab(null);
+    setTabLoading(false);
     currentEventIndex.current = 0;
     pausedAt.current = 0;
     
@@ -383,5 +423,7 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
     mouseTarget,
     mouseAction,
     mouseVisible,
+    activeTab,
+    tabLoading,
   };
 }

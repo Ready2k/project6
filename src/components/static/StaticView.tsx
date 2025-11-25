@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTimeline } from '../../hooks/useTimeline';
 import CustomerProfilePanel from './CustomerProfilePanel';
 import AccountSummaryPanel from './AccountSummaryPanel';
@@ -6,6 +6,10 @@ import TransactionHistoryPanel from './TransactionHistoryPanel';
 import RiskFraudPanel from './RiskFraudPanel';
 import PreviousInteractionsPanel from './PreviousInteractionsPanel';
 import AiAssistSidebar from './AiAssistSidebar';
+import ChangeAddressTile from '../tiles/ChangeAddressTile';
+import DisputeTransactionTile from '../tiles/DisputeTransactionTile';
+import UpdateContactDetailsTile from '../tiles/UpdateContactDetailsTile';
+import MouseCursor from '../dynamic/MouseCursor';
 import {
   mockCustomer,
   mockAccount,
@@ -48,8 +52,12 @@ const safeTransactions: Transaction[] = Array.isArray(mockTransactions) ? mockTr
 const safeRiskIndicators: RiskIndicator[] = Array.isArray(mockRiskIndicators) ? mockRiskIndicators : [];
 const safeInteractions: Interaction[] = Array.isArray(mockInteractions) ? mockInteractions : [];
 
+type TabType = 'overview' | 'changeAddress' | 'disputeTransaction' | 'updateContactDetails';
+
 export default function StaticView({ timelineData }: StaticViewProps) {
   const timelineState = useTimeline(timelineData);
+  const [activeTab, setActiveTab] = useState<TabType>('overview');
+  const [loadingTab, setLoadingTab] = useState<TabType | null>(null);
 
   useEffect(() => {
     // Auto-start the timeline after a brief delay
@@ -58,6 +66,14 @@ export default function StaticView({ timelineData }: StaticViewProps) {
     }, 500);
     return () => clearTimeout(timer);
   }, [timelineState]);
+
+  // Handle tab switching events from timeline
+  useEffect(() => {
+    if (timelineState.activeTab) {
+      setActiveTab(timelineState.activeTab as TabType);
+    }
+    setLoadingTab(timelineState.tabLoading ? (timelineState.activeTab as TabType) : null);
+  }, [timelineState.activeTab, timelineState.tabLoading]);
 
   return (
     <div className="h-screen bg-gray-100 flex flex-col" role="main">
@@ -141,11 +157,103 @@ export default function StaticView({ timelineData }: StaticViewProps) {
           <AccountSummaryPanel account={safeAccount} />
         </aside>
 
-        {/* Center: Transaction & Risk Panels */}
-        <div className="flex-1 overflow-y-auto bg-gray-50 p-4 space-y-4">
-          <TransactionHistoryPanel transactions={safeTransactions} />
-          <RiskFraudPanel riskIndicators={safeRiskIndicators} />
-          <PreviousInteractionsPanel interactions={safeInteractions} />
+        {/* Center: Tabbed Interface */}
+        <div className="flex-1 flex flex-col overflow-hidden bg-gray-50">
+          {/* Tab Navigation */}
+          <div className="bg-white border-b border-gray-300 px-4 flex gap-1 shadow-sm">
+            <button
+              onClick={() => setActiveTab('overview')}
+              className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                activeTab === 'overview'
+                  ? 'border-blue-600 text-blue-600'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
+              }`}
+            >
+              📊 Overview
+            </button>
+            <button
+              onClick={() => setActiveTab('changeAddress')}
+              className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                activeTab === 'changeAddress'
+                  ? 'border-blue-600 text-blue-600'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
+              }`}
+            >
+              🏠 Change Address
+            </button>
+            <button
+              onClick={() => setActiveTab('disputeTransaction')}
+              className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                activeTab === 'disputeTransaction'
+                  ? 'border-blue-600 text-blue-600'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
+              }`}
+            >
+              ⚠️ Dispute Transaction
+            </button>
+            <button
+              onClick={() => setActiveTab('updateContactDetails')}
+              className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                activeTab === 'updateContactDetails'
+                  ? 'border-blue-600 text-blue-600'
+                  : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
+              }`}
+            >
+              📞 Update Contact
+            </button>
+          </div>
+
+          {/* Tab Content */}
+          <div className="flex-1 overflow-y-auto p-4">
+            {loadingTab === activeTab ? (
+              <div className="flex items-center justify-center h-64">
+                <div className="text-center">
+                  <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+                  <p className="text-gray-600">Loading form...</p>
+                </div>
+              </div>
+            ) : (
+              <>
+                {activeTab === 'overview' && (
+                  <div className="space-y-4">
+                    <TransactionHistoryPanel transactions={safeTransactions} />
+                    <RiskFraudPanel riskIndicators={safeRiskIndicators} />
+                    <PreviousInteractionsPanel interactions={safeInteractions} />
+                  </div>
+                )}
+                
+                {activeTab === 'changeAddress' && (
+                  <div className="max-w-2xl">
+                    <ChangeAddressTile
+                      data={undefined}
+                      onSubmit={(data) => timelineState.handleTileSubmit('changeAddress', data)}
+                      status={timelineState.tileStatuses['changeAddress'] || 'idle'}
+                    />
+                  </div>
+                )}
+                
+                {activeTab === 'disputeTransaction' && (
+                  <div className="max-w-2xl">
+                    <DisputeTransactionTile
+                      data={undefined}
+                      onSubmit={(data) => timelineState.handleTileSubmit('disputeTransaction', data)}
+                      status={timelineState.tileStatuses['disputeTransaction'] || 'idle'}
+                    />
+                  </div>
+                )}
+                
+                {activeTab === 'updateContactDetails' && (
+                  <div className="max-w-2xl">
+                    <UpdateContactDetailsTile
+                      data={undefined}
+                      onSubmit={(data) => timelineState.handleTileSubmit('updateContactDetails', data)}
+                      status={timelineState.tileStatuses['updateContactDetails'] || 'idle'}
+                    />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </div>
 
         {/* Right Sidebar: AI Assist */}
@@ -183,6 +291,13 @@ export default function StaticView({ timelineData }: StaticViewProps) {
           </div>
         </div>
       </div>
+
+      {/* Mouse Cursor Animation - Shows manual clicking */}
+      <MouseCursor
+        targetElement={timelineState.mouseTarget || undefined}
+        action={timelineState.mouseAction || undefined}
+        visible={timelineState.mouseVisible}
+      />
     </div>
   );
 }

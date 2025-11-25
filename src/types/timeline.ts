@@ -58,6 +58,24 @@ export type MouseClickEvent = {
   target: string; // CSS selector
 };
 
+export type TabSwitchEvent = {
+  t: number;
+  event: 'tab_switch';
+  tab: string;
+};
+
+export type TabLoadingEvent = {
+  t: number;
+  event: 'tab_loading';
+  tab: string;
+};
+
+export type TabLoadedEvent = {
+  t: number;
+  event: 'tab_loaded';
+  tab: string;
+};
+
 export type TimelineEvent =
   | TranscriptEvent
   | AiReasoningEvent
@@ -67,7 +85,10 @@ export type TimelineEvent =
   | PanelHideEvent
   | AutoPopulateEvent
   | MouseMoveEvent
-  | MouseClickEvent;
+  | MouseClickEvent
+  | TabSwitchEvent
+  | TabLoadingEvent
+  | TabLoadedEvent;
 
 export interface TranscriptLine {
   speaker: 'customer' | 'agent';

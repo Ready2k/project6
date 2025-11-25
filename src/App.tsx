@@ -25,11 +25,11 @@ function Home() {
             aria-label="View static agent desktop demonstration"
           >
             <div className="flex items-center justify-center gap-2 mb-1">
-              <span className="text-2xl">📊</span>
+              <span className="text-2xl">🖱️</span>
               <span className="text-xl font-bold">Static View</span>
             </div>
-            <p className="text-sm text-blue-100 font-medium">Current State</p>
-            <p className="text-xs text-blue-200 mt-1">All panels visible at all times</p>
+            <p className="text-sm text-blue-100 font-medium">Current State - Manual Workflow</p>
+            <p className="text-xs text-blue-200 mt-1">Agent clicks tabs, waits for loading, manually fills forms</p>
           </Link>
           
           <Link
@@ -38,11 +38,11 @@ function Home() {
             aria-label="View dynamic agent desktop demonstration"
           >
             <div className="flex items-center justify-center gap-2 mb-1">
-              <span className="text-2xl">✨</span>
+              <span className="text-2xl">🤖</span>
               <span className="text-xl font-bold">Dynamic View</span>
             </div>
-            <p className="text-sm text-purple-100 font-medium">Future State</p>
-            <p className="text-xs text-purple-200 mt-1">AI-orchestrated contextual UI</p>
+            <p className="text-sm text-purple-100 font-medium">Future State - AI-Assisted</p>
+            <p className="text-xs text-purple-200 mt-1">AI surfaces forms automatically, pre-fills data, agent confirms</p>
           </Link>
         </div>
         
