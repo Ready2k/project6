@@ -96,9 +96,20 @@ function DynamicView({ timelineData }: DynamicViewProps) {
             <div className="text-xs text-gray-500">Sentiment</div>
             <div className="flex items-center gap-1 mt-1">
               <div className="w-16 bg-gray-200 rounded-full h-1.5">
-                <div className="bg-green-500 h-1.5 rounded-full" style={{ width: '75%' }}></div>
+                <div 
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    timelineState.sentiment.value >= 70 ? 'bg-green-500' :
+                    timelineState.sentiment.value >= 40 ? 'bg-yellow-500' : 'bg-red-500'
+                  }`}
+                  style={{ width: `${timelineState.sentiment.value}%` }}
+                ></div>
               </div>
-              <span className="text-xs font-medium text-green-600">Positive</span>
+              <span className={`text-xs font-medium ${
+                timelineState.sentiment.value >= 70 ? 'text-green-600' :
+                timelineState.sentiment.value >= 40 ? 'text-yellow-600' : 'text-red-600'
+              }`}>
+                {timelineState.sentiment.label}
+              </span>
             </div>
           </div>
         </div>

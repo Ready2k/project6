@@ -89,6 +89,13 @@ export type NarrationEvent = {
   text: string;
 };
 
+export type SentimentEvent = {
+  t: number;
+  event: 'sentiment';
+  value: number; // 0-100
+  label: 'Negative' | 'Neutral' | 'Positive';
+};
+
 export type TimelineEvent =
   | TranscriptEvent
   | AiReasoningEvent
@@ -103,7 +110,8 @@ export type TimelineEvent =
   | TabLoadingEvent
   | TabLoadedEvent
   | FormTypingEvent
-  | NarrationEvent;
+  | NarrationEvent
+  | SentimentEvent;
 
 export interface TranscriptLine {
   speaker: 'customer' | 'agent';

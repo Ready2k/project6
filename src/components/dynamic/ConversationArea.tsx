@@ -60,7 +60,7 @@ function ConversationArea({ transcripts }: ConversationAreaProps) {
                 <div className={`text-xs font-semibold mb-1 ${
                   transcript.speaker === 'agent' ? 'text-blue-100' : 'text-gray-500'
                 }`}>
-                  {transcript.speaker === 'agent' ? '🤖 Agent (Human)' : '👤 Customer'}
+                  {transcript.speaker === 'agent' ? '👤 Colleague (John)' : '👤 Sarah Mitchell'}
                 </div>
                 <div className="text-sm leading-relaxed">{transcript.text}</div>
               </div>

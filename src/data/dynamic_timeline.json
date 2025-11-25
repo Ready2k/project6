@@ -1,6 +1,12 @@
 [
   {
     "t": 0,
+    "event": "sentiment",
+    "value": 50,
+    "label": "Neutral"
+  },
+  {
+    "t": 0,
     "event": "transcript",
     "speaker": "customer",
     "text": "Hi, I need to update my address. I've recently moved."
@@ -136,6 +142,12 @@
     "text": "Great! Your address has been updated successfully."
   },
   {
+    "t": 16500,
+    "event": "sentiment",
+    "value": 65,
+    "label": "Positive"
+  },
+  {
     "t": 17000,
     "event": "panel_hide",
     "panel": "changeAddress"
@@ -190,7 +202,7 @@
     "data": {
       "transactionId": "TXN-001",
       "amount": "459.99",
-      "reason": "Unrecognized charge"
+      "reason": "unauthorized"
     }
   },
   {
@@ -215,6 +227,12 @@
     "event": "transcript",
     "speaker": "agent",
     "text": "I've initiated the dispute. You should see a provisional credit within 3-5 business days."
+  },
+  {
+    "t": 31500,
+    "event": "sentiment",
+    "value": 75,
+    "label": "Positive"
   },
   {
     "t": 32000,
@@ -249,7 +267,7 @@
     "data": {
       "phone": "+1 (555) 234-5678",
       "email": "sarah.mitchell@email.com",
-      "preferredContact": "Phone"
+      "preferredContactMethod": "phone"
     }
   },
   {
@@ -277,11 +295,17 @@
   },
   {
     "t": 41500,
+    "event": "sentiment",
+    "value": 90,
+    "label": "Positive"
+  },
+  {
+    "t": 42000,
     "event": "narration",
     "text": "Three tasks completed efficiently - AI handled the complexity, the agent focused on the customer."
   },
   {
-    "t": 42000,
+    "t": 42500,
     "event": "panel_hide",
     "panel": "updateContactDetails"
   },

@@ -30,7 +30,7 @@ export default function AiAssistSidebar({ transcripts }: AiAssistSidebarProps) {
           {transcripts.map((line, index) => (
             <div key={index} className="text-sm">
               <span className={`font-medium ${line.speaker === 'customer' ? 'text-blue-600' : 'text-purple-600'}`}>
-                {line.speaker === 'customer' ? '👤 Customer' : '🤖 Agent'}:
+                {line.speaker === 'customer' ? '👤 Sarah Mitchell' : '👤 Colleague (John)'}:
               </span>
               <span className="text-gray-700 ml-1">{line.text}</span>
             </div>

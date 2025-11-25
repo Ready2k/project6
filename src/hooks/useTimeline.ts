@@ -22,6 +22,7 @@ import type {
   TabLoadedEvent,
   FormTypingEvent,
   NarrationEvent,
+  SentimentEvent,
 } from '../types/timeline';
 
 interface UseTimelineReturn extends TimelineState {
@@ -37,6 +38,7 @@ interface UseTimelineReturn extends TimelineState {
   tabLoading: boolean;
   formValues: Record<string, string>;
   narration: string | null;
+  sentiment: { value: number; label: string };
 }
 
 export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
@@ -91,12 +93,14 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
   const [activeTab, setActiveTab] = useState<string | null>(null);
   const [tabLoading, setTabLoading] = useState(false);
   const [narration, setNarration] = useState<string | null>(null);
+  const [sentiment, setSentiment] = useState<{ value: number; label: string }>({ value: 50, label: 'Neutral' });
 
   // Refs for managing timeline playback
   const currentEventIndex = useRef(0);
   const timeoutId = useRef<number | null>(null);
   const startTime = useRef<number>(0);
-  const pausedAt = useRef<number>(0);
+  const pausedTime = useRef<number>(0);
+  const elapsedBeforePause = useRef<number>(0);
 
   // Process a single event
   const processEvent = useCallback((event: TimelineEvent) => {
@@ -317,6 +321,19 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
           break;
         }
 
+        case 'sentiment': {
+          const sentimentEvent = event as SentimentEvent;
+          if (typeof sentimentEvent.value !== 'number') {
+            console.warn('Invalid sentiment event: missing or invalid value property', event);
+            break;
+          }
+          setSentiment({
+            value: sentimentEvent.value,
+            label: sentimentEvent.label || 'Neutral',
+          });
+          break;
+        }
+
         default:
           console.warn('Unrecognized event type:', (event as any).event);
       }
@@ -333,18 +350,25 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
     }
 
     const event = sortedEvents.current[currentEventIndex.current];
-    const previousEventTime = currentEventIndex.current > 0 
-      ? sortedEvents.current[currentEventIndex.current - 1].t 
-      : 0;
-    
-    const delay = event.t - previousEventTime;
+    const eventTime = event.t;
+    const elapsed = elapsedBeforePause.current;
+    const delay = eventTime - elapsed;
 
-    timeoutId.current = window.setTimeout(() => {
+    if (delay <= 0) {
+      // Event should have already happened, process immediately
       processEvent(event);
       setCurrentTime(event.t);
       currentEventIndex.current++;
       scheduleNextEvent();
-    }, delay);
+    } else {
+      timeoutId.current = window.setTimeout(() => {
+        processEvent(event);
+        setCurrentTime(event.t);
+        elapsedBeforePause.current = event.t;
+        currentEventIndex.current++;
+        scheduleNextEvent();
+      }, delay);
+    }
   }, [processEvent]);
 
   // Play control
@@ -354,13 +378,7 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
     
     hasStartedRef.current = true;
     setIsPlaying(true);
-    
-    if (currentEventIndex.current === 0) {
-      startTime.current = Date.now();
-    } else {
-      // Resume from paused position
-      startTime.current = Date.now() - pausedAt.current;
-    }
+    startTime.current = Date.now();
     
     scheduleNextEvent();
   }, [isPlaying, scheduleNextEvent]);
@@ -370,7 +388,6 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
     if (!isPlaying) return;
     
     setIsPlaying(false);
-    pausedAt.current = Date.now() - startTime.current;
     
     if (timeoutId.current !== null) {
       clearTimeout(timeoutId.current);
@@ -394,8 +411,9 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
     setTabLoading(false);
     setFormValues({});
     setNarration(null);
+    setSentiment({ value: 50, label: 'Neutral' });
     currentEventIndex.current = 0;
-    pausedAt.current = 0;
+    elapsedBeforePause.current = 0;
     
     if (timeoutId.current !== null) {
       clearTimeout(timeoutId.current);
@@ -464,5 +482,6 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
     tabLoading,
     formValues,
     narration,
+    sentiment,
   };
 }
