@@ -99,7 +99,6 @@ export function useTimeline(timelineData: TimelineEvent[]): UseTimelineReturn {
   const currentEventIndex = useRef(0);
   const timeoutId = useRef<number | null>(null);
   const startTime = useRef<number>(0);
-  const pausedTime = useRef<number>(0);
   const elapsedBeforePause = useRef<number>(0);
 
   // Process a single event
